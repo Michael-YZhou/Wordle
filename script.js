@@ -25,6 +25,7 @@ while (play) {
       console.log("Invalid letter!");
     }
   } else {
+    // if the word is valid, check every letter against the choosen word
     for (let inputLetterId = 0; inputLetterId < maxLen; inputLetterId++) {
       for (
         let correctLetterId = 0;

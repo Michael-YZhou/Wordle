@@ -8,8 +8,11 @@
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
-
   font-family: sans-serif;
+}
+
+.header-section {
+  margin-bottom: 24px;
 }
 
 /* the grid is made up of 3 layers of flex containers */
@@ -22,6 +25,7 @@
   align-content: center;
   justify-content: center;
   gap: 8px;
+  margin-bottom: 24px;
 }
 
 .row {
@@ -35,9 +39,22 @@
   width: 40px;
   height: 40px;
   border: 3px solid #cdcdcd;
+  background-color: #e7e7e7;
   /* make the letter box a flex-box to center the child */
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
+}
+
+.key {
+  background-color: #e7e7e7;
+  width: 40px;
+  height: 44px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+#Enter,
+#Backspace {
+  width: 76px;
 }

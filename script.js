@@ -3,8 +3,6 @@
 // we need to pass rowId into this function to help locate the specific letter box,
 // then apply CSS class to it after checking the letter it contains.
 function checkResult(row, inputWord) {
-  // rowId starts from 0, the Enter key will add 1 to rowId before this function is called,
-  // therefore need to subtract 1 from it.
   console.log("input word:", inputWord);
   console.log("correct answer:", correctWord, "\n\n");
 
@@ -52,16 +50,16 @@ function checkResult(row, inputWord) {
       play = false;
     }
   }
-  // after every try, count down the round, player loses after use up 6 rounds
+  // after every try, count the round, player loses after use up 6 rounds
   round += 1;
-  console.log("round: ", round);
+  console.log("round:", round);
   if (round === 6) {
     console.log("You lose. Try again!");
     play = false;
     // return;
   }
 
-  console.log("\n\n");
+  console.log("\n");
 }
 // checkResult("AARTI");
 
@@ -217,9 +215,8 @@ function displayLetter(rowId) {
 // *************************** Main Logic of the Game *************************
 
 let randomNum = Math.floor(Math.random() * validWords.length);
-let correctWord = validWords[0]; // change back to random
-
-// check input length
+let correctWord = validWords[randomNum]; // change back to random
+console.log("correct answer:", correctWord, "\n\n");
 
 let maxLen = correctWord.length;
 

@@ -11,8 +11,16 @@
   font-family: sans-serif;
 }
 
+.flex-container {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 4px;
+}
+
 .header-section {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 /* the grid is made up of 3 layers of flex containers */
@@ -25,7 +33,7 @@
   align-content: center;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .row {
@@ -36,9 +44,9 @@
 }
 
 .letter-box {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #cdcdcd;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #cdcdcd;
   background-color: #e7e7e7;
   /* make the letter box a flex-box to center the child */
   display: inline-flex;
@@ -46,7 +54,12 @@
   justify-content: center;
 }
 
+.letter {
+  font-size: 30px;
+}
+
 .key {
+  font-weight: 500;
   background-color: #e7e7e7;
   width: 40px;
   height: 44px;
@@ -57,4 +70,26 @@
 #Enter,
 #Backspace {
   width: 76px;
+}
+
+.letter-uncheck {
+  border: 2px solid #898989;
+}
+
+.letter-wrong {
+  color: #e7e7e7;
+  border: 2px solid #898989;
+  background-color: #898989;
+}
+
+.letter-incorrect-position {
+  color: #e7e7e7;
+  border: 2px solid #af9028;
+  background-color: #af9028;
+}
+
+.letter-correct {
+  color: #e7e7e7;
+  border: 2px solid #7ebd3a;
+  background-color: #7ebd3a;
 }

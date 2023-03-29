@@ -8,12 +8,16 @@ let correctWord = validWords[0]; // change back to random
 let maxLen = correctWord.length;
 
 // this is the trigger to turn the game on/off
-let play = 1;
+let play = 0;
 // total 6 tries allowed, set a counter
 let round = 0;
-while (play) {
+while (play) {}
+
+// *************************** Check winning condition ***************************
+
+function checkResult(inputWord) {
   // at the start of every round ask player for input word
-  let inputWord = "ABACA"; // convert to upper *** CHANGE LATER
+  // let inputWord = "ABACA"; // convert to upper *** CHANGE LATER
 
   // FOR LOOP I=5
   // 1 LETTER ENTERRED
@@ -65,8 +69,9 @@ while (play) {
 
   console.log("\n\n");
 }
+// checkResult("AARTI");
 
-// ******************************** Keyboard ********************************
+// ******************************** Keyboard Layout ********************************
 
 const keySet = {
   0: ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -102,10 +107,9 @@ generateKeyboard(keySet);
 // *************** Display & store input letter in variable ****************
 
 // IMPORTANT!
-// use ROW ID to move to next row, use BOX ID to move to next box.
-// the 1st box to start with is actually index 1, not 0.
-// however to make the logic work, we add 1 to the index BEFORE entering a letter.
-// we also subdtract 1 from the index AFTER a letter is deleted.
+// use rowId to move to next row, use BoxId to move to next box.
+// add 1 to the BoxId BEFORE entering a letter.
+// subdtract 1 from the BoxId AFTER a letter is deleted.
 // in the event handler function, use queryselector() and :nth-child() to access the box!
 rowId = 0;
 
@@ -121,19 +125,22 @@ function getLetter(rowId) {
     keyElement.addEventListener("click", function () {
       switch (key) {
         case "Enter":
-          // click Enter will increase the ROW ID by 1, which will move the cursor to the next line;
-          // also need to reset the BOX ID to 0, so it start from 1st box again.
+          // click Enter increases the rowId by 1, which moves the cursor to the next line;
+          // also need to reset the boxId to 0, so it start from 1st box again in the next row.
           inputWord = curLetter;
           rowId++;
           boxId = 0;
           console.log(rowId);
+          console.log(curLetter);
+          // take the word and check winning condition here!!!
+          checkResult("AARTI");
         // break;
         case "Backspace":
           if (boxId === 0 || (boxId > 5 && boxId % 5 === 0)) {
             console.log("no letter to delete");
             console.log(boxId);
           } else {
-            // select the ID of the box that the cursor is currently on
+            // select the box using :nth-child()
             output = document.querySelector(
               `.row-${rowId} div:nth-child(${boxId}) span`
             );
@@ -151,9 +158,10 @@ function getLetter(rowId) {
             if (boxId !== 0 && boxId % 5 === 0) {
               console.log("exceed maximun letter");
             } else {
+              // update cursor
               boxId++;
               console.log(boxId);
-              // select the ID of the box that the cursor is currently on
+              // select the box using :nth-child()
               output = document.querySelector(
                 `.row-${rowId} div:nth-child(${boxId}) span`
               );

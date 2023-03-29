@@ -1,14 +1,12 @@
 // *************************** Check winning condition ***************************
 
-// we need to pass in rowId into this function
-// to locate the specific letter box and apply CSS class
-// based on what letter the user enters.
+// we need to pass rowId into this function to help locate the specific letter box,
+// then apply CSS class to it after checking the letter it contains.
 function checkResult(row, inputWord) {
   // rowId starts from 0, the Enter key will add 1 to rowId before this function is called,
   // therefore need to subtract 1 from it.
-  row = row - 1;
-  console.log("input word: ", inputWord);
-  console.log("correct answer: ", correctWord, "\n\n");
+  console.log("input word:", inputWord);
+  console.log("correct answer:", correctWord, "\n\n");
 
   // Check if the word is valid, invalid word won't get processed, must re-enter.
   if (!validWords.includes(inputWord)) {
@@ -25,12 +23,12 @@ function checkResult(row, inputWord) {
         correctLetterId < maxLen;
         correctLetterId++
       ) {
-        // boxId start from 1, however the for loop index start from 0,
-        // Therefore add 1 to it before pass it into querySelector.
+        // boxId start from 1, however the for-loop index starts from 0,
+        // Therefore add 1 to index before pass it into querySelector.
         let box = document.querySelector(
           `.row-${row} div:nth-child(${inputLetterId + 1})`
         );
-        console.log("row: ", row, inputLetterId);
+        console.log("row:", row, "box:", inputLetterId);
         console.log(box);
         if (inputWord[inputLetterId] === correctWord[inputLetterId]) {
           console.log("correct letter, correct position");
@@ -51,7 +49,7 @@ function checkResult(row, inputWord) {
     // Check winning condition
     if (inputWord === correctWord) {
       console.log("Congrets! You win!");
-      play = 0;
+      play = false;
     }
   }
   // after every try, count down the round, player loses after use up 6 rounds
@@ -59,7 +57,7 @@ function checkResult(row, inputWord) {
   console.log("round: ", round);
   if (round === 6) {
     console.log("You lose. Try again!");
-    play = 0;
+    play = false;
     // return;
   }
 
@@ -67,7 +65,7 @@ function checkResult(row, inputWord) {
 }
 // checkResult("AARTI");
 
-// ******************************** Keyboard Layout ********************************
+// ******************************** Create keyboard ********************************
 
 const keySet = {
   0: ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -103,7 +101,8 @@ generateKeyboard(keySet);
 // *************** Display & store input letter in variable ****************
 
 // IMPORTANT!
-// use rowId to move to next row, use BoxId to move to next box.
+// use rowId to move to next row, use boxId to move to next box.
+// boxId & rowId start from 0.
 // add 1 to the BoxId BEFORE entering a letter.
 // subdtract 1 from the BoxId AFTER a letter is deleted.
 // in the event handler function, use queryselector() and :nth-child() to access the box!
@@ -119,29 +118,32 @@ function displayLetter(rowId) {
   let keys = document.getElementsByClassName("key");
   for (let keyElement of keys) {
     let key = keyElement.textContent;
-    keyElement.addEventListener("click", function () {
+    keyElement.addEventListener("click", function handleClick() {
       switch (key) {
         case "Enter":
           // click Enter increases the rowId by 1, which moves the cursor to the next line;
           // also need to reset the boxId to 0, so it start from 1st box again in the next row.
           // the Enter btn only functional when user have input 5 letters.
           // apply bundry to the row (0-5)
-          if (rowId < 6) {
+          console.log("play:", play);
+          if (rowId < 6 && play) {
             if (boxId === 5) {
               inputWord = curLetter;
-              rowId++;
               boxId = 0;
-              console.log(rowId);
-              console.log(curLetter);
+              // console.log(rowId);
+              // console.log(curLetter);
               // take the word and check winning condition here!!!
               checkResult(rowId, inputWord);
+              // move to next row
+              rowId++;
               // reset the user input for the next round
               curLetter = "";
             } else {
               console.log("Must enter all 5 letters");
             }
           } else {
-            console.log("you have tried 6 times. please start a new game!");
+            // when user has played 6 rounds or have won the game.
+            console.log("Please start a new game!");
           }
         // break;
         case "Backspace":
@@ -150,18 +152,19 @@ function displayLetter(rowId) {
             // if don't specify this condition, Backspace will be triggered when press Enter
             if (key !== "Enter") {
               if (boxId === 0 || (boxId > 5 && boxId % 5 === 0)) {
-                console.log("no letter to delete");
+                console.log("nothing to delete");
                 console.log(boxId);
               } else {
                 // select the box using :nth-child()
                 output = document.querySelector(
                   `.row-${rowId} div:nth-child(${boxId}) span`
                 );
-                console.log(output);
-                console.log(boxId);
+                // console.log(output);
+                // console.log(boxId);
                 output.textContent = "";
-                curLetter -= key;
-                console.log(boxId);
+                curLetter = curLetter.slice(0, curLetter.length - 1);
+                console.log(curLetter);
+                // console.log(boxId);
                 // add css class to the letter box when letter deleted
                 outputBox = document.querySelector(
                   `.row-${rowId} div:nth-child(${boxId})`
@@ -173,10 +176,11 @@ function displayLetter(rowId) {
               }
             }
           } else {
-            console.log("you have tried 6 times. please start a new game!");
+            // when user has played 6 rounds or have won the game.
+            console.log("Please start a new game!");
           }
         default:
-          if (rowId < 6) {
+          if (rowId < 6 && play) {
             // if don't specify this condition, Backspace & Enter will also be triggered when press any key
             if (key !== "Backspace" && key !== "Enter") {
               if (boxId !== 0 && boxId % 5 === 0) {
@@ -184,15 +188,16 @@ function displayLetter(rowId) {
               } else {
                 // update cursor
                 boxId++;
-                console.log(boxId);
+                // console.log(boxId);
                 // select the box using :nth-child()
                 output = document.querySelector(
                   `.row-${rowId} div:nth-child(${boxId}) span`
                 );
-                console.log(output);
+                // console.log(output);
                 output.textContent = key;
-                console.log(key);
+                // console.log(key);
                 curLetter += key;
+                console.log(curLetter);
                 // add css class to the letter box when letter entered
                 outputBox = document.querySelector(
                   `.row-${rowId} div:nth-child(${boxId})`
@@ -201,17 +206,13 @@ function displayLetter(rowId) {
               }
             }
           } else {
-            console.log("you have tried 6 times. please start a new game!");
+            // when user has played 6 rounds or have won the game.
+            console.log("Please start a new game!");
           }
       }
     });
   }
 }
-
-// getLetter(rowId);
-
-// let x = document.querySelector(`.row-${0} div:nth-child(${1}) span`);
-// console.log(x);
 
 // *************************** Main Logic of the Game *************************
 
@@ -223,9 +224,10 @@ let correctWord = validWords[0]; // change back to random
 let maxLen = correctWord.length;
 
 // this is the trigger to turn the game on/off
-let play = 0;
+let play = true;
 // total 6 tries allowed, set a counter
 let round = 0;
 let rowId = 0;
 
+// initiate the game
 displayLetter(rowId);

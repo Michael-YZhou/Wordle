@@ -60,11 +60,16 @@
 
 .key {
   font-weight: 500;
-  background-color: #e7e7e7;
+  background-color: #cdcdcd;
   width: 40px;
-  height: 44px;
+  height: 50px;
   cursor: pointer;
   border-radius: 8px;
+  border: none;
+}
+
+.key:hover {
+  background-color: #d7d7d7;
 }
 
 #Enter,

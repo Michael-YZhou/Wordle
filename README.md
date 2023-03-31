@@ -19,18 +19,24 @@ This is a game where you get 6 chances to guess a 5-letter word.
 
 ## Key Takeaways
 
-1. Navigate the grid:
+1. Navigate the grid
 
-I use the Row-Id and Box-Id variables to add eventListeners to specific boxes in the grid. The Row-Id increments after clicking on the "Enter" key. The Box-Id is increments after clicking on any of the "Letter" key and decrements after clicking on the "Backspace" key.
+   I use the Row-Id and Box-Id variables to go through each box in the grid and add eventListener to it, therefore, the keyboard can be connected to the boxes and the winning condition can be checked based on player's input. The Row-Id increments after clicking on the "Enter" key. The Box-Id is increments after clicking on any of the "Letter" key, and it decrements after clicking on the "Backspace" key. Some "if conditions" were added to interupt this process so the game can be paused when the player makes invalid input, or to terminate the game when the player wins/loses.
 
 2. Deal with "out-of-bounds"
 
-Since there are 30 boxes, my initial plan was to assign 0 to 29 to all boxes as their ID, then select them in Javascript. However, because every row is examined independently, I had to set bounds at the first and last box in every row to avoid the buttons (especially "Enter" and "Backspace") malfunctioning. I realised dividing each row in to it's own div and use ":nth-child()" pseudo class to select them is much easier.
+   Since there are 30 boxes, my initial plan was to assign 0 to 29 to all boxes as their ID, then select them in Javascript. However, because every row is examined independently, I had to set bounds and conditions at the first and last box in every row to avoid the buttons (especially "Enter" and "Backspace") malfunctioning. I realised dividing each row in to it's own div and use ":nth-child()" pseudo class to select the boxes in that row is much easier to implement.
 
 3. Use "switch" statement
 
-In displayLetter() function I used "switch" statement to handle different cases. However I didn't add "break" at the end of each case. As a result the former cases will NOT be excluded from the later ones, and all cases were activated at the same time. This issue has been fixed.
+   In displayLetter() function I used "switch" statement to handle different cases. However I didn't add "break" at the end of each case. As a result, the former cases will NOT be excluded from the latter ones, and multiple cases were activated at the same time a key was clicked. This issue has been fixed.
 
 ## Possible Improvements
 
-The displayLetter() function can be break down into smaller functions, which makes it easier for reviewing and debugging.
+1. Breakdown large functions
+
+   The displayLetter() function can be break down into smaller functions, which makes it easier for reviewing and debugging.
+
+2. Add restart button
+
+   Instead of asking the player to reload the page, It would be better to include a restart button to reset the game.

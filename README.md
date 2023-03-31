@@ -37,6 +37,6 @@ This is a game where you get 6 chances to guess a 5-letter word.
 
    The displayLetter() function can be break down into smaller functions, which makes it easier for reviewing and debugging.
 
-2. Add restart button
+2. Add a restart button
 
-   Instead of asking the player to reload the page, It would be better to include a restart button to reset the game.
+   Instead of asking the player to reload the page, It would be better to use a restart button to reset the game.

@@ -39,4 +39,4 @@ This is a game where you get 6 chances to guess a 5-letter word.
 
 2. Add a restart button
 
-   Instead of asking the player to reload the page, It would be better to use a restart button to reset the game.
+   Instead of asking the player to reload the page, it would be better to use a restart button to reset the game.

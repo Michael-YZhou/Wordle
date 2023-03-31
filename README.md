@@ -43,7 +43,7 @@ This is a game where you get 6 chances to guess a 5-letter word.
 
 3. Add eventListener on "keypress"
 
-   Allow the game to read user input from their keyboards.
+   Allow the program to take user input from their keyboards.
 
 4. Add more CSS
 

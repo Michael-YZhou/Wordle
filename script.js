@@ -6,55 +6,45 @@ function checkResult(row, inputWord) {
   console.log("input word:", inputWord);
   console.log("correct answer:", correctWord, "\n\n");
 
-  // Check if the word is valid, invalid word won't get processed, must re-enter.
-  if (!validWords.includes(inputWord)) {
-    console.log("Invalid word! Try another one!");
-    // round += 1;
-    for (let inputLetterId = 0; inputLetterId < maxLen; inputLetterId++) {
-      console.log("Invalid letter!");
-    }
-  } else {
-    // if the word is valid, check every letter against the choosen word
-    for (let inputLetterId = 0; inputLetterId < maxLen; inputLetterId++) {
-      for (
-        let correctLetterId = 0;
-        correctLetterId < maxLen;
-        correctLetterId++
-      ) {
-        // nth-child() start from 1, however the for-loop index starts from 0,
-        // Therefore add 1 to index before pass it into querySelector.
-        let box = document.querySelector(
-          `.row-${row} div:nth-child(${inputLetterId + 1})`
-        );
-        console.log("row:", row, "box:", inputLetterId);
-        console.log(box);
-        if (inputWord[inputLetterId] === correctWord[inputLetterId]) {
-          console.log("correct letter, correct position");
-          box.classList.add("letter-correct");
-          break;
-        } else if (correctWord.includes(inputWord[inputLetterId])) {
-          console.log("correct letter, wrong position");
-          box.classList.add("letter-incorrect-position");
-          break;
-        } else {
-          console.log("wrong letter");
-          box.classList.add("letter-wrong");
-          break;
-        }
+  // word is valid, check every letter against the choosen word
+  for (let inputLetterId = 0; inputLetterId < maxLen; inputLetterId++) {
+    for (let correctLetterId = 0; correctLetterId < maxLen; correctLetterId++) {
+      // nth-child() start from 1, however the for-loop index starts from 0,
+      // Therefore add 1 to index before pass it into querySelector.
+      let box = document.querySelector(
+        `.row-${row} div:nth-child(${inputLetterId + 1})`
+      );
+      console.log("row:", row, "box:", inputLetterId);
+      console.log(box);
+      if (inputWord[inputLetterId] === correctWord[inputLetterId]) {
+        console.log("correct letter, correct position");
+        box.classList.add("letter-correct");
+        break;
+      } else if (correctWord.includes(inputWord[inputLetterId])) {
+        console.log("correct letter, wrong position");
+        box.classList.add("letter-incorrect-position");
+        break;
+      } else {
+        console.log("wrong letter");
+        box.classList.add("letter-wrong");
+        break;
       }
     }
-
-    // Check winning condition
-    if (inputWord === correctWord) {
-      console.log("Congrets! You win!");
-      play = false;
-    }
   }
+
+  // Check winning condition
+  if (inputWord === correctWord) {
+    console.log("Congrets! You win!");
+    alert("🥳 Congrets! You win!");
+    play = false;
+  }
+
   // after every try, count the round, player loses after use up 6 rounds
   round += 1;
   console.log("round:", round);
   if (round === 6) {
     console.log("You lose. Try again!");
+    alert("🥲 You lose the game. Try again!");
     play = false;
   }
 
@@ -107,7 +97,7 @@ generateKeyboard(keySet);
 function displayLetter(rowId) {
   let boxId = 0;
   // the letter pressed will be returned from this function
-  let curLetter = "";
+  let currentWord = "";
   let outputBox;
   let output;
   // add eventlistoner to all keys on the keyboard
@@ -123,20 +113,19 @@ function displayLetter(rowId) {
           // apply bundry to the row (0-5)
           console.log("play:", play);
           if (rowId < 6 && play) {
-            if (validWords.includes(curLetter) && boxId === 5) {
-              inputWord = curLetter;
+            if (validWords.includes(currentWord) && boxId === 5) {
+              inputWord = currentWord;
               boxId = 0;
-              // console.log(rowId);
-              // console.log(curLetter);
               // take the word and check winning condition here!!!
               checkResult(rowId, inputWord);
               // move to next row
               rowId++;
               // reset the user input for the next round
-              curLetter = "";
+              currentWord = "";
             } else {
               // word is not valid, or less than 5 letters
-              console.log("Word is not valid");
+              console.log("Invalid word! Try another one!");
+              alert("🚫 Invalid word! Try another one!");
             }
           } else {
             // when user has played 6 rounds or have won the game.
@@ -155,12 +144,9 @@ function displayLetter(rowId) {
               output = document.querySelector(
                 `.row-${rowId} div:nth-child(${boxId}) span`
               );
-              // console.log(output);
-              // console.log(boxId);
               output.textContent = "";
-              curLetter = curLetter.slice(0, curLetter.length - 1);
-              console.log("current input:", curLetter);
-              // console.log(boxId);
+              currentWord = currentWord.slice(0, currentWord.length - 1);
+              console.log("current input:", currentWord);
               // add css class to the letter box when letter deleted
               outputBox = document.querySelector(
                 `.row-${rowId} div:nth-child(${boxId})`
@@ -182,16 +168,13 @@ function displayLetter(rowId) {
             } else {
               // update cursor
               boxId++;
-              // console.log(boxId);
               // select the box using :nth-child()
               output = document.querySelector(
                 `.row-${rowId} div:nth-child(${boxId}) span`
               );
-              // console.log(output);
               output.textContent = key;
-              // console.log(key);
-              curLetter += key;
-              console.log("current input:", curLetter);
+              currentWord += key;
+              console.log("current input:", currentWord);
               // add css class to the letter box when letter entered
               outputBox = document.querySelector(
                 `.row-${rowId} div:nth-child(${boxId})`

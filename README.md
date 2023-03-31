@@ -40,3 +40,11 @@ This is a game where you get 6 chances to guess a 5-letter word.
 2. Add a restart button
 
    Instead of asking the player to reload the page, it would be better to use a restart button to reset the game.
+
+3. Add eventListener on "keypress"
+
+   Allow the game to read user input from their keyboards.
+
+4. Add more CSS
+
+   Can add more colors, shardows and animation to the UI.

@@ -19,7 +19,7 @@ This is a game where you get 6 chances to guess a 5-letter word.
 
 ## Key Takeaways
 
-1. Navigate the grid
+1. Traverse the grid
 
    I use the Row-Id and Box-Id variables to go through each box in the grid and add eventListener to it, therefore, the keyboard can be connected to the boxes and the winning condition can be checked based on player's input. The Row-Id increments after clicking on the "Enter" key. The Box-Id is increments after clicking on any of the "Letter" key, and it decrements after clicking on the "Backspace" key. Some "if conditions" were added to interupt this process so the game can be paused when the player makes invalid input, or to terminate the game when the player wins/loses.
 

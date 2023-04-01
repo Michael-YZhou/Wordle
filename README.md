@@ -6,6 +6,10 @@ This is a game where you get 6 chances to guess a 5-letter word.
 
 ## How to Play
 
+- What does the game look like:
+
+  ![alt text](example.png)
+
 - Use the Wordle keyboard to enter your guess and submit your word by hitting the “enter” key on the keyboard.
 - The color of the tiles will change after you submit your word. A yellow tile indicates that you picked the right letter but it’s in the wrong spot. The green tile indicates that you picked the right letter in the correct spot. The gray tile indicates that the letter you picked is not included in the word at all.
 - Continue until you solve the Wordle or run out of guesses. Good luck!
@@ -41,7 +45,7 @@ This is a game where you get 6 chances to guess a 5-letter word.
 
    Instead of asking the player to reload the page, it would be better to use a restart button to reset the game.
 
-3. Add eventListener on "keypress"
+3. Add eventListener on "keydown"
 
    Allow the program to take user input from their keyboards.
 

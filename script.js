@@ -15,7 +15,7 @@ function checkResult(row, inputWord) {
         `.row-${row} div:nth-child(${inputLetterId + 1})`
       );
       console.log("row:", row, "box:", inputLetterId);
-      console.log(box);
+      // console.log(box);
       if (inputWord[inputLetterId] === correctWord[inputLetterId]) {
         console.log("correct letter, correct position");
         box.classList.add("letter-correct");
@@ -206,4 +206,7 @@ let round = 0;
 let rowId = 0;
 
 // initiate the game
+alert(
+  "Instruction: \n\n1. Use the Wordle keyboard to enter your guess and submit your word by hitting the “enter” key on the keyboard. \n\n2.The color of the tiles will change after you submit your word.\n\n3.Continue until you solve the Wordle or run out of guesses."
+);
 displayLetter(rowId);

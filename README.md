@@ -3,6 +3,7 @@
 ## Description
 
 This is a game where you get 6 chances to guess a 5-letter word.
+
 Hosted at: https://michael-yzhou.github.io/Wordle/
 
 ## How to Play
